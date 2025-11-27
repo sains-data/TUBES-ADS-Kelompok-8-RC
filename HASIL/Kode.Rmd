@@ -1,0 +1,147 @@
+---
+title: "tubes"
+author: "kelompok 8"
+date: "2025-11-24"
+output: html_document
+---
+
+```{r}
+# Load library
+library(readxl)
+library(dplyr)
+library(ggplot2)
+
+#dataset
+data <- read_excel("D:/Dataset Tubes ADS Kelompok 8 RC.xlsx", sheet = "Sheet1")
+
+# birsihkan nama kolom
+colnames(data) <- c("Akses_Internet", "Jenis_Tempat_Tinggal")
+
+#struktur data
+str(data)
+head(data)
+
+#bersihkan data (jika ada missing values)
+data <- na.omit(data)
+
+#Statistik Deskriptif
+#tabel frekuensi
+cat("Frekuensi Akses Internet:\n")
+print(table(data$Akses_Internet))
+
+cat("\nFrekuensi Jenis Tempat Tinggal:\n")
+print(table(data$Jenis_Tempat_Tinggal))
+
+#tabel kontngensi
+cat("\nTabel Kontingensi:\n")
+contingency_table <- table(data$Akses_Internet, data$Jenis_Tempat_Tinggal)
+print(contingency_table)
+
+#barplot
+par(mfrow = c(1, 2))
+barplot(table(data$Akses_Internet), main = "Distribusi Akses Internet", 
+        las = 2, col = "lightblue")
+barplot(table(data$Jenis_Tempat_Tinggal), main = "Distribusi Tempat Tinggal", 
+        las = 2, col = "lightgreen")
+
+#uji chi-square
+cat("\nUJI CHI-SQUARE:\n")
+chi_test <- chisq.test(contingency_table)
+print(chi_test)
+
+cat("\nExpected Frequencies:\n")
+print(chi_test$expected)
+
+# mosaic plot
+par(mfrow = c(1, 1))
+mosaicplot(contingency_table, 
+           main = "Hubungan Akses Internet dan Tempat Tinggal",
+           color = TRUE,
+           las = 1)
+
+# stacked bar plot
+contingency_df <- as.data.frame(contingency_table)
+colnames(contingency_df) <- c("Akses_Internet", "Tempat_Tinggal", "Frekuensi")
+
+ggplot(contingency_df, aes(x = Tempat_Tinggal, y = Frekuensi, fill = Akses_Internet)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Distribusi Akses Internet berdasarkan Tempat Tinggal",
+       x = "Jenis Tempat Tinggal",
+       y = "Frekuensi") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# cramér's v
+cramers_v <- assocstats(contingency_table)$cramer
+cat("\nCramér's V:", cramers_v, "\n")
+
+# interpretasi Cramér's V
+if(cramers_v < 0.1) {
+  cat("Hubungan sangat lemah\n")
+} else if(cramers_v < 0.3) {
+  cat("Hubungan lemah\n")
+} else if(cramers_v < 0.5) {
+  cat("Hubungan sedang\n")
+} else {
+  cat("Hubungan kuat\n")
+}
+
+#amnalisis post-hc(jika chi-square signifikan)
+if(chi_test$p.value < 0.05) {
+  cat("\nUji Chi-square signifikan, melakukan analisis post-hoc:\n")
+  
+  cat("\nStandardized Residuals:\n")
+  print(chi_test$stdres)
+  
+  # identifikasi sel yang berkontribusi signifikan
+  significant_cells <- which(abs(chi_test$stdres) > 1.96, arr.ind = TRUE)
+  cat("\nSel dengan residual signifikan (|residual| > 1.96):\n")
+  for(i in 1:nrow(significant_cells)) {
+    row_idx <- significant_cells[i, 1]
+    col_idx <- significant_cells[i, 2]
+    cat("Akses:", rownames(contingency_table)[row_idx], 
+        "- Tempat Tinggal:", colnames(contingency_table)[col_idx],
+        "- Residual:", round(chi_test$stdres[row_idx, col_idx], 3), "\n")
+  }
+}
+#proporsi persentase
+cat("\nDistribusi Persentase:\n")
+prop_table <- prop.table(contingency_table, margin = 2) * 100
+print(round(prop_table, 2))
+
+#heatmap
+ggplot(contingency_df, aes(x = Tempat_Tinggal, y = Akses_Internet, fill = Frekuensi)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "steelblue") +
+  geom_text(aes(label = Frekuensi), color = "black") +
+  labs(title = "Heatmap: Hubungan Akses Internet dan Tempat Tinggal",
+       x = "Jenis Tempat Tinggal",
+       y = "Akses Internet") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# perbandingan proporsi
+cat("\nPerbandingan Proporsi Akses Internet:\n")
+for(tempat in colnames(contingency_table)) {
+  cat("\nTempat Tinggal:", tempat, "\n")
+  temp_data <- contingency_table[, tempat]
+  for(i in 1:length(temp_data)) {
+    prop <- round(temp_data[i]/sum(temp_data) * 100, 1)
+    cat(names(temp_data)[i], ":", prop, "%\n")
+  }
+}
+
+#kesimpulan akhir hasil
+cat("\n=== SUMMARY HASIL ANALISIS ===\n")
+cat("Jumlah observasi:", nrow(data), "\n")
+cat("Nilai Chi-square:", round(chi_test$statistic, 3), "\n")
+cat("Derajat kebebasan:", chi_test$parameter, "\n")
+cat("P-value:", chi_test$p.value, "\n")
+cat("Cramér's V:", round(cramers_v, 3), "\n")
+
+if(chi_test$p.value < 0.05) {
+  cat("Kesimpulan: Terdapat hubungan yang signifikan antara jenis akses internet dan jenis tempat tinggal.\n")
+} else {
+  cat("Kesimpulan: Tidak terdapat hubungan yang signifikan antara jenis akses internet dan jenis tempat tinggal.\n")
+}
+```
