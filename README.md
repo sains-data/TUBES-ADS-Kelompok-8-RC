@@ -39,11 +39,8 @@ library(ggplot2)
 📁 Struktur Repository
 
 📁 project/
-
 │
-
 │── 📄 Dataset_output.csv
-
 │── 🖼️ Distribusi akses internet.png
 │── 🖼️ Distribusi Hasil.png
 │── 🖼️ Heatmap hubungan akses internet.png
