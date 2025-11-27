@@ -1,0 +1,106 @@
+Frekuensi Akses Internet:
+
+  Fasilitas Kampus            Lainnya Paket Data Seluler      Wi-Fi pribadi 
+                46                 17                225                170 
+
+Frekuensi Jenis Tempat Tinggal:
+
+                       Asrama                           Kos Rumah mengontrak bersama-sama      Rumah mengontrak Pribadi 
+                           27                           270                            50                            12 
+      Tinggal besama orangtua 
+                           99 
+
+Tabel Kontingensi:
+                    
+                     Asrama Kos Rumah mengontrak bersama-sama Rumah mengontrak Pribadi Tinggal besama orangtua
+  Fasilitas Kampus        5  31                             4                        1                       5
+  Lainnya                 0  17                             0                        0                       0
+  Paket Data Seluler     22 137                            24                        9                      33
+  Wi-Fi pribadi           0  85                            22                        2                      61
+
+UJI CHI-SQUARE:
+Warning in chisq.test(contingency_table) :
+  Chi-squared approximation may be incorrect
+	Pearson's Chi-squared test
+
+data:  contingency_table
+X-squared = 59.926, df = 12, p-value = 2.329e-08
+
+
+Expected Frequencies:
+                    
+                        Asrama       Kos Rumah mengontrak bersama-sama Rumah mengontrak Pribadi Tinggal besama orangtua
+  Fasilitas Kampus    2.711790  27.11790                      5.021834                1.2052402                9.943231
+  Lainnya             1.002183  10.02183                      1.855895                0.4454148                3.674672
+  Paket Data Seluler 13.264192 132.64192                     24.563319                5.8951965               48.635371
+  Wi-Fi pribadi      10.021834 100.21834                     18.558952                4.4541485               36.746725
+
+Cramér's V: 0.2088395 
+Hubungan lemah
+
+Uji Chi-square signifikan, melakukan analisis post-hoc:
+
+Standardized Residuals:
+                    
+                         Asrama        Kos Rumah mengontrak bersama-sama Rumah mengontrak Pribadi Tinggal besama orangtua
+  Fasilitas Kampus    1.5102400  1.2268068                    -0.5093731               -0.1997446              -1.8668818
+  Lainnya            -1.0516740  3.5061860                    -1.4709328               -0.6892251              -2.2065221
+  Paket Data Seluler  3.4666624  0.8280628                    -0.1688372                1.8167914              -3.5503598
+  Wi-Fi pribadi      -4.1153256 -2.9921544                     1.0672181               -1.4860051               5.6987956
+
+Sel dengan residual signifikan (|residual| > 1.96):
+Akses: Paket Data Seluler - Tempat Tinggal: Asrama - Residual: 3.467 
+Akses: Wi-Fi pribadi - Tempat Tinggal: Asrama - Residual: -4.115 
+Akses: Lainnya - Tempat Tinggal: Kos - Residual: 3.506 
+Akses: Wi-Fi pribadi - Tempat Tinggal: Kos - Residual: -2.992 
+Akses: Lainnya - Tempat Tinggal: Tinggal besama orangtua - Residual: -2.207 
+Akses: Paket Data Seluler - Tempat Tinggal: Tinggal besama orangtua - Residual: -3.55 
+Akses: Wi-Fi pribadi - Tempat Tinggal: Tinggal besama orangtua - Residual: 5.699 
+
+Distribusi Persentase:
+                    
+                     Asrama   Kos Rumah mengontrak bersama-sama Rumah mengontrak Pribadi Tinggal besama orangtua
+  Fasilitas Kampus    18.52 11.48                          8.00                     8.33                    5.05
+  Lainnya              0.00  6.30                          0.00                     0.00                    0.00
+  Paket Data Seluler  81.48 50.74                         48.00                    75.00                   33.33
+  Wi-Fi pribadi        0.00 31.48                         44.00                    16.67                   61.62
+
+Perbandingan Proporsi Akses Internet:
+
+Tempat Tinggal: Asrama 
+Fasilitas Kampus : 18.5 %
+Lainnya : 0 %
+Paket Data Seluler : 81.5 %
+Wi-Fi pribadi : 0 %
+
+Tempat Tinggal: Kos 
+Fasilitas Kampus : 11.5 %
+Lainnya : 6.3 %
+Paket Data Seluler : 50.7 %
+Wi-Fi pribadi : 31.5 %
+
+Tempat Tinggal: Rumah mengontrak bersama-sama 
+Fasilitas Kampus : 8 %
+Lainnya : 0 %
+Paket Data Seluler : 48 %
+Wi-Fi pribadi : 44 %
+
+Tempat Tinggal: Rumah mengontrak Pribadi 
+Fasilitas Kampus : 8.3 %
+Lainnya : 0 %
+Paket Data Seluler : 75 %
+Wi-Fi pribadi : 16.7 %
+
+Tempat Tinggal: Tinggal besama orangtua 
+Fasilitas Kampus : 5.1 %
+Lainnya : 0 %
+Paket Data Seluler : 33.3 %
+Wi-Fi pribadi : 61.6 %
+
+=== SUMMARY HASIL ANALISIS ===
+Jumlah observasi: 458 
+Nilai Chi-square: 59.926 
+Derajat kebebasan: 12 
+P-value: 2.328979e-08 
+Cramér's V: 0.209 
+Kesimpulan: Terdapat hubungan yang signifikan antara jenis akses internet dan jenis tempat tinggal.
