@@ -36,6 +36,22 @@ library(readxl)
 library(dplyr)
 library(ggplot2)
 
+Cara menjalankan script
+
+-Load library
+-baca dataset
+-bersihkan nama kolom
+-bersihkan data (jika ada missing values)
+-buat Statistik Deskriptif yang berisikan tabel frekuensi dan tabel kontingensi
+-buat barplot
+-uji chi-square
+-buat mosaic plot
+-analisis post-hc(jika chi-square signifikan)
+-bikin proporsi persentase
+-bandingkan proporsi
+-simpulkan hasil akhir
+
+
 📁 Struktur Repository
 
 📁 project/
@@ -51,3 +67,4 @@ library(ggplot2)
 │     └── 📝 codeR_8_RC.Rmd
 │
 └── 📘 README.md
+
