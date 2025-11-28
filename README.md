@@ -72,17 +72,22 @@ library(ggplot2)
 ```
 📁 project/
 │
-│──  Dataset_output.csv
-│──  Distribusi akses internet.png
-│──  Distribusi Hasil.png
-│──  Heatmap hubungan akses internet.png
-│──  Hubungan akses internet dan tempat tinggal.png
-│──  Ringkasan Statistik.txt
+├── 📂 Data hasil olahan/
+│     │──  Dataset_output.csv
+│     │──  Distribusi akses internet.png
+│     │──  Distribusi Hasil.png
+│     │──  Heatmap hubungan akses internet.png
+│     │──  Hubungan akses internet dan tempat tinggal.png
+│     └──  Ringkasan Statistik.txt
 │
-├──  script R/
+├── 📂 poster/
+│     └──  Poster_8_RC.pdf
+│
+├── 📂 script R/
 │     └──  codeR_8_RC.Rmd
 │
 └── 📘 README.md
+
 ```
 
 
